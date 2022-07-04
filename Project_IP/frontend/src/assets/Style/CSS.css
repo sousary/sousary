@@ -1,0 +1,142 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+/* body {
+    background-color: white;
+} */
+
+.border {
+    border-width:1px;
+    border-style:solid;
+    border-color:black;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 1px 1px 1px grey;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    margin-right: 5%;
+    width: 100%;
+}
+
+.greyText {
+    color: gray;
+}
+
+.rightLeft {
+    display: flex;
+    margin-right: 2px;
+}
+
+.blocLeft, .blocRight {
+    padding: 1em;
+    border: none;
+}
+
+.blocLeft {
+    flex: 0.60;
+}
+
+.blocRight {
+    flex: 1;
+}
+
+.artsLogo{
+    width: 80%;
+    height: 80%;
+}
+
+.arts{
+    display: block;
+    text-align: center;
+    font-size: 500%;
+    font-family: "Cinzel Decorative";
+    color: #000000;
+}
+
+.submitButton {
+    background-color: #000000;
+    border-color: #000000;
+    border-radius: 10px;
+    border-style: solid;
+    color: white;
+    width: 100%;
+    height: 40px;    
+}
+
+#switchRegisterLogin {
+    color: #000000;
+    font-weight: bold;
+}
+
+#textUnderLoginRegisterButton{
+    text-align: center;
+}
+
+.welcome{
+    font-size: 25px;
+    padding-bottom: 3px;
+    padding-top: 6px;
+}
+
+.signInUp{
+    font-size: 30px;
+}
+
+.happyTo{
+    font-size: 15px;
+}
+
+.errorMsg {
+    font-weight: 600;
+    text-align: center;
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 0%;
+}
+
+.seePass {
+    margin-top: 10px;
+    width: 30px;
+    height: fit-content;
+    margin-left: 4px;
+}
+
+.passwordDiv {
+    display: flex;
+}
+
+.welcomeDiv {
+    display: flex;
+}
+
+.houseMenuImg {
+    width: 45px;
+    height: 45px;
+}
+
+.usernameProfil {
+    color: black;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.p-col1 .follow{
+    text-align: center;
+    color: rgb(138, 138, 138);
+}
+
+.namesProfil {
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    font-style: italic;
+    font-weight: bold;
+}
+
+
+
+
+
