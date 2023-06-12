@@ -1,0 +1,17 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: RESOURCE-SERVER
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://LAPTOP-PLFS4SIV:9000
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

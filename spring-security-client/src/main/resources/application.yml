@@ -1,0 +1,40 @@
+server:
+  port: 8088
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          api-client-oidc:
+            provider: spring
+            client-id: first-party-id
+            client-secret: first-secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8088/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: api-client-oidc
+          api-client-authorization-code:
+            provider: spring
+            client-id: first-party-id
+            client-secret: first-secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8088/authorized"
+            scope: api.read
+            client-name: api-client-authorization-code
+          third-client-authorization-code:
+            provider: spring
+            client-id: third-party-id
+            client-secret: third-secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8088/authorized"
+            scope: api.read
+            client-name: third-client-authorization-code
+        provider:
+          spring:
+            issuer-uri: http://LAPTOP-PLFS4SIV:9000
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
