@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class DefaultSecurityConfig {
@@ -27,13 +28,15 @@ public class DefaultSecurityConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(authorizeRequests ->
-                        authorizeRequests.anyRequest().authenticated()
-                )
-                .formLogin(Customizer.withDefaults())
-;
-//                .addFilter(new JwtUsernamePasswordAuthenticationFilter(authenticationProvider,hashPasswordUtils,userRepository,jwtUtil));
-        return http.build();
+
+                http
+                        .csrf().disable()
+                        .authorizeHttpRequests().antMatchers("/**").permitAll()
+                        .anyRequest().authenticated()
+                        .and()
+                        .formLogin().disable();
+
+                return http.build();
     }
 
     @Autowired

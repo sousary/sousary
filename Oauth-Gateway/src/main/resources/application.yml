@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: resource-server
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/users
+          filters:
+            - RemoveRequestHeader= Cookie
+            - AuthenticationFilter
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://LAPTOP-PLFS4SIV:9000
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/

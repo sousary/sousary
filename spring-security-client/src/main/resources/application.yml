@@ -19,7 +19,7 @@ spring:
             client-secret: first-secret
             authorization-grant-type: authorization_code
             redirect-uri: "http://127.0.0.1:8088/authorized"
-            scope: api.read
+            scope: user
             client-name: api-client-authorization-code
           third-client-authorization-code:
             provider: spring
@@ -27,14 +27,16 @@ spring:
             client-secret: third-secret
             authorization-grant-type: authorization_code
             redirect-uri: "http://127.0.0.1:8088/authorized"
-            scope: api.read
+            scope: third-party
             client-name: third-client-authorization-code
         provider:
           spring:
             issuer-uri: http://LAPTOP-PLFS4SIV:9000
+
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka/
+

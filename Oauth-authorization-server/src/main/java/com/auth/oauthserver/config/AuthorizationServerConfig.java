@@ -42,7 +42,8 @@ public class AuthorizationServerConfig {
     public SecurityFilterChain authServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
-        return http.formLogin(Customizer.withDefaults()).build();
+//        return http.formLogin(Customizer.withDefaults()).build();
+        return http.build();
     }
 
     @Bean
@@ -52,32 +53,29 @@ public class AuthorizationServerConfig {
                 .clientSecret(passwordEncoder.encode("first-secret"))
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .authorizationGrantType(AuthorizationGrantType.PASSWORD)
-//                .authorizationGrantType(AuthorizationGrantType.JWT_BEARER)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .redirectUri("http://127.0.0.1:8088/login/oauth2/code/api-client-oidc")
                 .redirectUri("http://127.0.0.1:8088/authorized")
                 .scope(OidcScopes.OPENID)
-                .scope("api.read")
-                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                .scope("user")
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
                 .build();
+        log.info("client1------------------>"+registeredClient1);
         RegisteredClient registeredClient2 = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("third-party-id")
                 .clientSecret(passwordEncoder.encode("third-secret"))
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .authorizationGrantType(AuthorizationGrantType.PASSWORD)
-//                .authorizationGrantType(AuthorizationGrantType.JWT_BEARER)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .redirectUri("http://127.0.0.1:8088/authorized")
                 .scope(OidcScopes.OPENID)
-                .scope("api.read")
-                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                .scope("third-party")
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
                 .build();
+        log.info("client2------------>"+registeredClient2);
 
 
         return new InMemoryRegisteredClientRepository(registeredClient1,registeredClient2);
-//        return new InMemoryRegisteredClientRepository(registeredClient1);
     }
 
     @Bean
