@@ -16,10 +16,7 @@ import static org.springframework.security.oauth2.client.web.reactive.function.c
 
 @RestController
 @Slf4j
-@RequestMapping("/api")
 public class ClientController {
-
-
     private final WebClient webClient;
 
     public ClientController(WebClient webClient) {
@@ -27,21 +24,18 @@ public class ClientController {
     }
 
 
-    @GetMapping("/hello")
+    @GetMapping("/hello") //-------->public not need access token
     public String hello(Principal principal) {
         return "Hello " +principal.getName()+", get hello from free access token";
     }
-    @GetMapping(value = "/users")
-    public String users(@RegisteredOAuth2AuthorizedClient("api-client-authorization-code") OAuth2AuthorizedClient client1,
-                        @RegisteredOAuth2AuthorizedClient("third-client-authorization-code") OAuth2AuthorizedClient client2
-                        )
+    @GetMapping(value = "/api/users")
+    public String users(@RegisteredOAuth2AuthorizedClient("api-client-authorization-code") OAuth2AuthorizedClient client)
     {
         log.info("into controller---------------------------------->");
         String stringReturn = this.webClient
                 .get()
-                .uri("http://127.0.0.1:8090/api/users")
-                .attributes(oauth2AuthorizedClient(client1))
-                .attributes(oauth2AuthorizedClient(client2))
+                .uri("http://127.0.0.1:9001/api/users")//----------------------->with gateway port
+                .attributes(oauth2AuthorizedClient(client))
                 .accept(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
                 .retrieve()
                 .bodyToMono(String  .class)
@@ -50,42 +44,5 @@ public class ClientController {
         return  stringReturn;
 
     }
-    @GetMapping(value = "/free")
-    public String[] free(@RegisteredOAuth2AuthorizedClient("api-client-authorization-code") OAuth2AuthorizedClient client1,
-                        @RegisteredOAuth2AuthorizedClient("third-client-authorization-code") OAuth2AuthorizedClient client2
-    )
-    {
-        log.info("into controller---------------------------------->");
-        String[] stringArray = this.webClient
-                .get()
-                .uri("http://127.0.0.1:8090/api/free")
-                .attributes(oauth2AuthorizedClient(client1))
-                .attributes(oauth2AuthorizedClient(client2))
-                .accept(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
-                .retrieve()
-                .bodyToMono(String[] .class)
-                .block();
-        log.info("-----------------String response---------------------->"+stringArray);
-        return  stringArray;
 
-    }
-    @GetMapping(value = "/test")
-    public String[] test(@RegisteredOAuth2AuthorizedClient("api-client-authorization-code") OAuth2AuthorizedClient client1,
-                         @RegisteredOAuth2AuthorizedClient("third-client-authorization-code") OAuth2AuthorizedClient client2
-    )
-    {
-        log.info("into controller---------------------------------->");
-        String[] string = this.webClient
-                .get()
-                .uri("http://localhost:9001/api/test")
-                .attributes(oauth2AuthorizedClient(client1))
-                .attributes(oauth2AuthorizedClient(client2))
-                .accept(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
-                .retrieve()
-                .bodyToMono(String[] .class)
-                .block();
-        log.info("-----------------String response---------------------->"+string);
-        return  string;
-
-    }
 }

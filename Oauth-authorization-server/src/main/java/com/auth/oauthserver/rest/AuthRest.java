@@ -36,16 +36,7 @@ public class AuthRest {
             return "Not success Authenticated!!";
         }
     }
-
-
-    @GetMapping("/generateToken")
-    public ResponseEntity<String> validateToken() throws Exception {
-        String accessToken = jwtUtil.lastToken();
-        log.info("-----------------------get final token-----------: " + accessToken);
-        return ResponseEntity.ok(accessToken);
-    }
-
-
+    ///////////////////////////not work //////////////////////////////////////
 
 }
 

@@ -1,4 +1,4 @@
-package com.example.OauthGateway.config;
+package com.example.OauthGatewayJwt.util;
 
 
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -9,10 +9,11 @@ import java.util.function.Predicate;
 
 @Component
 public class RouteValidator {
-
+    //----------------------------->devide route that need validate access token----------------//
     public static final List<String> openApiEndpoints = List.of(
             "/api/**",
             "/eureka"
+
     );
 
     public Predicate<ServerHttpRequest> isSecured =

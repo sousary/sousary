@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 @Controller
 public class LoginController {
-    private static String authoizationRequestbaseUri="login/authorization";
-    Map<String,String> oauth2AuthenticationUrls=new HashMap<>();
+    private static final String authorizationRequestBaseUri="/authorized";
+    Map<String,String> oauth2AuthenticationUrls = new HashMap<>();
     @Autowired
     private ClientRegistrationRepository clientRegistrationRepository;
     @GetMapping("/login")
-    public String getLoginPage(Model model){
+    public String getLoginPage(Model model) {
         Iterable<ClientRegistration> clientRegistrations = null;
         ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
                 .as(Iterable.class);
@@ -26,13 +26,13 @@ public class LoginController {
             clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
         }
 
+        assert clientRegistrations != null;
         clientRegistrations.forEach(registration ->
                 oauth2AuthenticationUrls.put(registration.getClientName(),
-                        authoizationRequestbaseUri + "/" + registration.getRegistrationId()));
+                        authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
         model.addAttribute("urls", oauth2AuthenticationUrls);
 
-        return "oauth_login";
-
-
+        return "login";
     }
 }
+///////////////////////////////////// in progress///////////////////////////////////////////

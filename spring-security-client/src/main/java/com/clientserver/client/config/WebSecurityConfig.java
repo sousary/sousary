@@ -23,7 +23,6 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig {
-
     private OAuth2AuthorizationCodeGrantRequestEntityConverter defaultConverter;
 
     private static final String[] WHITE_LIST_URLS = {
@@ -45,12 +44,14 @@ public class WebSecurityConfig {
                 .antMatchers(WHITE_LIST_URLS).permitAll()
 
                 .antMatchers("/api/**").authenticated()
-                .and()
-                .oauth2Login().loginPage("/login");
+                //                .antMatchers("/login").permitAll()
 //                .and()
-//                .oauth2Login(oauth2login ->
-//                        oauth2login.loginPage("/oauth2/authorization/api-client-oidc"))
-//                .oauth2Client(Customizer.withDefaults());
+//                .oauth2Login().loginPage("/login");
+
+                .and()
+                .oauth2Login(oauth2login ->
+                        oauth2login.loginPage("/oauth2/authorization/api-client-oidc"))
+                .oauth2Client(Customizer.withDefaults());
 
 
         return http.build();

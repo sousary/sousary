@@ -1,4 +1,4 @@
-package com.auth.oauthserver.filter;
+package com.resource.Oauthresourceserver.utils;
 
 
 import org.springframework.beans.factory.annotation.Value;
@@ -19,23 +19,10 @@ import java.security.spec.X509EncodedKeySpec;
 
 @Service
 public class RSAKeyUtils {
-    @Value("${private.key.path}")
-    private String PRIVATE_KEY_PATH;
+
     @Value("${public.key.path}")
     private String PUBLIC_KEY_PATH;
 
-    public byte[] readAllBytes(InputStream inputStream) throws IOException {
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        int bytesRead;
-        byte[] data = new byte[1024];
-
-        while ((bytesRead = inputStream.read(data, 0, data.length)) != -1) {
-            buffer.write(data, 0, bytesRead);
-        }
-
-        buffer.flush();
-        return buffer.toByteArray();
-    }
 
     public RSAPublicKey getPublicKey() throws InvalidKeySpecException, NoSuchAlgorithmException, IOException {
         byte[] keyBytes = Files.readAllBytes(Paths.get(PUBLIC_KEY_PATH));
@@ -46,16 +33,6 @@ public class RSAKeyUtils {
         return (RSAPublicKey) kf.generatePublic(spec);
     }
 
-    public RSAPrivateKey getPrivateKey()
-            throws Exception {
-
-        byte[] keyBytes = Files.readAllBytes(Paths.get(PRIVATE_KEY_PATH));
-
-        PKCS8EncodedKeySpec spec =
-                new PKCS8EncodedKeySpec(keyBytes);
-        KeyFactory kf = KeyFactory.getInstance("RSA");
-        return (RSAPrivateKey) kf.generatePrivate(spec);
-    }
 
 }
 

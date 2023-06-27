@@ -21,7 +21,7 @@ public class ResourceServerConfig {
         http
                 .authorizeRequests()
                 .antMatchers("/api/**").access("hasIpAddress('127.0.0.1')")
-                .antMatchers("/api/users")
+                .antMatchers("/api/**")
                 .access("hasAnyAuthority('SCOPE_user')")
                 .anyRequest().authenticated()
 //                .and()
@@ -42,18 +42,6 @@ public class ResourceServerConfig {
 
 
     }
-
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:9227"));
-//        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
-//        configuration.setAllowedHeaders(Arrays.asList("Authorization"));
-//        configuration.setAllowCredentials(false);
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
 
 }
 

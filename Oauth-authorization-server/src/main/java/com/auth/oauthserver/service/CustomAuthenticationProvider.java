@@ -1,9 +1,8 @@
 package com.auth.oauthserver.service;
-
-import com.auth.oauthserver.repository.UserRepository;
 import com.auth.oauthserver.entity.User;
 import com.auth.oauthserver.filter.HashPasswordUtils;
 import com.auth.oauthserver.filter.JwtUtil;
+import com.auth.oauthserver.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String hashPassword = hashPasswordUtils.hashSHA256(rawPassword, pSalt);
 
         System.out.println("-------------------------hash password--------------"+hashPassword);
-        System.out.println("user password========================="+users.getPassword()+" hash password================================="+hashPassword);
+        System.out.println("user password=========================>"+users.getPassword()+" hash password=================================>"+hashPassword);
         if(Objects.equals(users.getPassword(), hashPassword)) {
 
            UsernamePasswordAuthenticationToken data= new UsernamePasswordAuthenticationToken(user.getUsername(),

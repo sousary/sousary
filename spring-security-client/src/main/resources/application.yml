@@ -21,14 +21,6 @@ spring:
             redirect-uri: "http://127.0.0.1:8088/authorized"
             scope: user
             client-name: api-client-authorization-code
-          third-client-authorization-code:
-            provider: spring
-            client-id: third-party-id
-            client-secret: third-secret
-            authorization-grant-type: authorization_code
-            redirect-uri: "http://127.0.0.1:8088/authorized"
-            scope: third-party
-            client-name: third-client-authorization-code
         provider:
           spring:
             issuer-uri: http://LAPTOP-PLFS4SIV:9000

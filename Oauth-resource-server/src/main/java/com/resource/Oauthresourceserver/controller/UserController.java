@@ -4,20 +4,10 @@ import com.resource.Oauthresourceserver.payload.UserResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-//@CrossOrigin(origins = {
-//        "http://localhost:9227"
-//},
-//        allowedHeaders = "Authorization",
-//        allowCredentials = "false",
-//        maxAge = 15 * 60,
-//        methods = {
-//                RequestMethod.GET
-//        })
 @RequestMapping("/api")
 @RestController
 public class UserController {
-    @GetMapping("users")
+    @GetMapping("/users")
     public ResponseEntity<?> getUser() {
         UserResponse userResponse=new UserResponse("Test");
         System.out.println(userResponse);
