@@ -1,4 +1,17 @@
-spring:
+#spring:
+#  cloud:
+#    gateway:
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: "http://localhost:8761"
+#            allowedHeaders:
+#              - content-type
+#            allowedMethods:
+#              - GET
+#              - POST
+#              - PUT
+#              - DELETE
 #  cloud:
 #    gateway:
 #      routes:
@@ -14,13 +27,17 @@ spring:
 #        - id: resource-server
 #          uri: http://localhost:8090
 #          predicates:
-#            - Path=/api/users
-#
-#          filters:
-#            - AddRequestHeader= Authorization
+##            - Path=/api/users
+##
+##          filters:
+##            - AddRequestHeader= Authorization
 #            - AuthenticationFilter
 #            - RemoveRequestHeader = Cookie
-eureka:
-  client:
-    service-url:
-      defaultZone : http://localhost:8761/eureka/
+#spring:
+#  profiles:
+#    active: development
+#  cloud:
+#    config:
+#      uri: http://localhost:9090/
+
+
